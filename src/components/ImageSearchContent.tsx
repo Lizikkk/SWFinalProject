@@ -3,7 +3,7 @@ import { ImageGrid } from './ImageGrid';
 import { Pagination } from './Pagination';
 import type { UnsplashResponse } from '../interfaces/unsplashResponse.interface';
 import type { UnsplashImage } from '../interfaces/unsplashImage.interface';
-import { loading } from '../styles/styles';
+import { loading, closeBtn } from '../styles/styles';
 
 interface Props {
   data?: UnsplashResponse;
@@ -19,6 +19,9 @@ export const ImageSearchContent = ({ data, page, setPage, isLoading }: Props) =>
     setSelectedImage(image);
   };
 
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   if (isLoading) return <p className={loading}>Loading...</p>;
   if (!data) return null;
@@ -36,11 +39,16 @@ export const ImageSearchContent = ({ data, page, setPage, isLoading }: Props) =>
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
-          onClick={() => {
-            setSelectedImage(null);
-          }}
-          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}
+          onClick={closeModal}
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}
         >
+          <button
+            onClick={closeModal}
+            className={closeBtn}
+          >
+            ×
+          </button>
+
           <img
             src={selectedImage.urls.full || selectedImage.urls.full}
             alt={selectedImage.alt_description || 'Full image'}
