@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchImages } from '../api/fetchImages';
 
-export const useImageSearch = (initialQuery = 'nature') => {
+export const useImageSearch = (initialQuery = 'search') => {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [page, setPage] = useState(1);
